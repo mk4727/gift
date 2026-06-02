@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Blush Romance palette */
+    --background: 350 100% 98%;
+    --foreground: 340 40% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 340 40% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 340 40% 18%;
+
+    --primary: 338 65% 53%;            /* deep rose #c44569 */
+    --primary-foreground: 350 100% 98%;
+    --primary-glow: 345 85% 70%;
+
+    --secondary: 345 100% 92%;         /* soft pink #ffd6e0 */
+    --secondary-foreground: 340 50% 25%;
+
+    --muted: 345 60% 95%;
+    --muted-foreground: 340 20% 45%;
+
+    --accent: 345 85% 78%;             /* rose #ff8fa8 */
+    --accent-foreground: 340 50% 18%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 345 50% 90%;
+    --input: 345 50% 90%;
+    --ring: 338 65% 53%;
+
+    --radius: 1rem;
+
+    /* Romantic gradients */
+    --gradient-romance: linear-gradient(135deg, hsl(345 100% 96%), hsl(345 90% 88%) 50%, hsl(338 80% 80%));
+    --gradient-rose: linear-gradient(135deg, hsl(345 85% 78%), hsl(338 65% 53%));
+    --gradient-glow: radial-gradient(ellipse at top, hsl(345 100% 92% / 0.8), transparent 70%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.9), hsl(345 100% 97% / 0.7));
+
+    /* Romantic shadows */
+    --shadow-soft: 0 10px 40px -12px hsl(338 65% 53% / 0.25);
+    --shadow-glow: 0 0 60px hsl(345 85% 78% / 0.5);
+    --shadow-card: 0 20px 50px -20px hsl(338 50% 40% / 0.2);
+
+    --transition-romance: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 345 100% 97%;
+    --sidebar-foreground: 340 40% 25%;
+    --sidebar-primary: 338 65% 53%;
+    --sidebar-primary-foreground: 350 100% 98%;
+    --sidebar-accent: 345 90% 92%;
+    --sidebar-accent-foreground: 340 50% 25%;
+    --sidebar-border: 345 60% 88%;
+    --sidebar-ring: 338 65% 53%;
+  }
+
+  .dark {
+    --background: 340 30% 8%;
+    --foreground: 345 100% 95%;
+    --card: 340 30% 12%;
+    --card-foreground: 345 100% 95%;
+    --popover: 340 30% 12%;
+    --popover-foreground: 345 100% 95%;
+    --primary: 345 85% 70%;
+    --primary-foreground: 340 30% 10%;
+    --secondary: 340 25% 20%;
+    --secondary-foreground: 345 100% 95%;
+    --muted: 340 25% 18%;
+    --muted-foreground: 345 30% 70%;
+    --accent: 338 65% 53%;
+    --accent-foreground: 345 100% 95%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 345 100% 95%;
+    --border: 340 25% 20%;
+    --input: 340 25% 20%;
+    --ring: 345 85% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', sans-serif;
+    background-image: var(--gradient-glow), linear-gradient(180deg, hsl(var(--background)), hsl(345 100% 96%));
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, .font-script {
+    font-family: 'Dancing Script', cursive;
+  }
+
+  .font-pacifico {
+    font-family: 'Pacifico', cursive;
+  }
+}
+
+@layer utilities {
+  .bg-romance { background: var(--gradient-romance); }
+  .bg-rose-grad { background: var(--gradient-rose); }
+  .bg-card-grad { background: var(--gradient-card); }
+  .shadow-soft { box-shadow: var(--shadow-soft); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-card-romance { box-shadow: var(--shadow-card); }
+  .text-gradient-rose {
+    background: var(--gradient-rose);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glass {
+    background: hsl(0 0% 100% / 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+}
+
+@keyframes float-heart {
+  0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.7; }
+  90% { opacity: 0.7; }
+  100% { transform: translateY(-10vh) translateX(40px) rotate(360deg); opacity: 0; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.animate-pulse-soft { animation: pulse-soft 2s ease-in-out infinite; }

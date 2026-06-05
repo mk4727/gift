@@ -102,8 +102,8 @@ const Scrapbook = () => {
       style={{ transform: `rotate(${p.rotation}deg)` }}
     >
       <div className={`absolute -top-2 left-1/2 -translate-x-1/2 w-14 h-4 ${p.tape} rotate-[-3deg] shadow-sm rounded-sm`} />
-      <div className="aspect-square w-full bg-secondary/30 overflow-hidden">
-        <img src={p.url} alt={p.caption} className="w-full h-full object-cover" draggable={false} />
+      <div className="aspect-[3/4] w-full bg-secondary/30 overflow-hidden">
+        <img src={p.url} alt={p.caption} className="w-full h-full object-contain" draggable={false} />
       </div>
       <p
         className="absolute bottom-0.5 left-0 right-0 text-center text-foreground/80 text-sm md:text-base"
@@ -137,10 +137,10 @@ const Scrapbook = () => {
                 : "linear-gradient(to left, transparent, hsl(30 30% 20% / 0.28))",
           }}
         />
-        <div className="grid grid-cols-1 grid-rows-2 gap-3 p-4 md:p-6 h-full">
+        <div className="grid grid-cols-1 grid-rows-2 gap-3 p-3 md:p-5 h-full">
           {items.map((p, i) => (
             <div key={p.id + i} className="flex items-center justify-center">
-              <div className="max-w-[78%] w-full">{renderPolaroid(p, p.id + side + i)}</div>
+              <div className="max-w-[92%] w-full">{renderPolaroid(p, p.id + side + i)}</div>
             </div>
           ))}
         </div>

@@ -1,7 +1,6 @@
 import { ReactNode } from "react";
 import { Navbar } from "./Navbar";
 import { FloatingHearts } from "./FloatingHearts";
-import { MusicPlayer } from "./MusicPlayer";
 import { Heart } from "lucide-react";
 
 export const Layout = ({ children }: { children: ReactNode }) => (
@@ -17,6 +16,5 @@ export const Layout = ({ children }: { children: ReactNode }) => (
         <p className="font-script text-lg text-gradient-rose">Forever Us</p>
       </div>
     </footer>
-    <MusicPlayer />
   </div>
 );

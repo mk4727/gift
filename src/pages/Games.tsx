@@ -14,60 +14,60 @@ const quiz = [
   { q: "Our perfect date is...", a: ["Beach walk", "Movie night", "Dinner & dance", "All of the above"], correct: 3 },
 ];
 
-const LoveQuiz = () => {
-  const [step, setStep] = useState(0);
-  const [score, setScore] = useState(0);
-  const [picked, setPicked] = useState<number | null>(null);
+// const LoveQuiz = () => {
+//   const [step, setStep] = useState(0);
+//   const [score, setScore] = useState(0);
+//   const [picked, setPicked] = useState<number | null>(null);
 
-  const pick = (i: number) => {
-    if (picked !== null) return;
-    setPicked(i);
-    if (i === quiz[step].correct) setScore((s) => s + 1);
-    setTimeout(() => {
-      setPicked(null);
-      setStep((s) => s + 1);
-    }, 900);
-  };
+//   const pick = (i: number) => {
+//     if (picked !== null) return;
+//     setPicked(i);
+//     if (i === quiz[step].correct) setScore((s) => s + 1);
+//     setTimeout(() => {
+//       setPicked(null);
+//       setStep((s) => s + 1);
+//     }, 900);
+//   };
 
-  const reset = () => { setStep(0); setScore(0); setPicked(null); };
+//   const reset = () => { setStep(0); setScore(0); setPicked(null); };
 
-  if (step >= quiz.length) {
-    return (
-      <div className="text-center py-8">
-        <Heart className="h-16 w-16 fill-primary text-primary mx-auto mb-4 animate-pulse-soft" />
-        <h3 className="font-script text-4xl text-gradient-rose mb-2">You scored {score}/{quiz.length}</h3>
-        <p className="text-muted-foreground mb-6">
-          {score === quiz.length ? "Perfect! You know me by heart 💕" : score >= 3 ? "So close! You really do know me 💖" : "Aww, time for more dates 😘"}
-        </p>
-        <Button onClick={reset} className="bg-rose-grad text-primary-foreground rounded-full"><RotateCcw className="mr-2 h-4 w-4" /> Play again</Button>
-      </div>
-    );
-  }
+//   if (step >= quiz.length) {
+//     return (
+//       <div className="text-center py-8">
+//         <Heart className="h-16 w-16 fill-primary text-primary mx-auto mb-4 animate-pulse-soft" />
+//         <h3 className="font-script text-4xl text-gradient-rose mb-2">You scored {score}/{quiz.length}</h3>
+//         <p className="text-muted-foreground mb-6">
+//           {score === quiz.length ? "Perfect! You know me by heart 💕" : score >= 3 ? "So close! You really do know me 💖" : "Aww, time for more dates 😘"}
+//         </p>
+//         <Button onClick={reset} className="bg-rose-grad text-primary-foreground rounded-full"><RotateCcw className="mr-2 h-4 w-4" /> Play again</Button>
+//       </div>
+//     );
+//   }
 
-  const cur = quiz[step];
-  return (
-    <div>
-      <p className="text-xs text-muted-foreground mb-2">Question {step + 1} / {quiz.length}</p>
-      <h3 className="font-script text-3xl text-foreground mb-6">{cur.q}</h3>
-      <div className="grid sm:grid-cols-2 gap-3">
-        {cur.a.map((opt, i) => (
-          <button
-            key={i}
-            onClick={() => pick(i)}
-            className={cn(
-              "p-4 rounded-2xl border-2 text-left transition-all",
-              picked === null && "border-primary/20 hover:border-primary hover:bg-secondary/40",
-              picked !== null && i === cur.correct && "border-green-500 bg-green-50",
-              picked === i && i !== cur.correct && "border-destructive bg-destructive/10",
-            )}
-          >
-            {opt}
-          </button>
-        ))}
-      </div>
-    </div>
-  );
-};
+//   const cur = quiz[step];
+//   return (
+//     <div>
+//       <p className="text-xs text-muted-foreground mb-2">Question {step + 1} / {quiz.length}</p>
+//       <h3 className="font-script text-3xl text-foreground mb-6">{cur.q}</h3>
+//       <div className="grid sm:grid-cols-2 gap-3">
+//         {cur.a.map((opt, i) => (
+//           <button
+//             key={i}
+//             onClick={() => pick(i)}
+//             className={cn(
+//               "p-4 rounded-2xl border-2 text-left transition-all",
+//               picked === null && "border-primary/20 hover:border-primary hover:bg-secondary/40",
+//               picked !== null && i === cur.correct && "border-green-500 bg-green-50",
+//               picked === i && i !== cur.correct && "border-destructive bg-destructive/10",
+//             )}
+//           >
+//             {opt}
+//           </button>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };
 
 /* ---------- Tic Tac Toe ---------- */
 type Cell = "❤️" | "💙" | null;
@@ -244,7 +244,7 @@ const TruthOrDare = () => {
 
 /* ---------- Page ---------- */
 const games = [
-  { id: "quiz", title: "Love Quiz", icon: Heart, comp: <LoveQuiz /> },
+  // { id: "quiz", title: "Love Quiz", icon: Heart, comp: <LoveQuiz /> },
   { id: "tic", title: "Tic Tac Toe", icon: Gamepad2, comp: <TicTacToe /> },
   { id: "wheel", title: "Spin the Wheel", icon: Sparkles, comp: <SpinWheel /> },
   { id: "td", title: "Truth or Dare", icon: HelpCircle, comp: <TruthOrDare /> },

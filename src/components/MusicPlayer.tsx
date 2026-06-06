@@ -18,8 +18,8 @@ const TRACKS: Track[] = [
     url: "https://cdn.pixabay.com/download/audio/2026/06/06/audio_d20101e188.mp3?filename=u_peqs3yb1iv-sanam-teri-kasam-ankit-tiwari-128-kbps-547560.mp3",
   },
   {
-    title: "Cinematic Strings",
-    url: "https://cdn.pixabay.com/download/audio/2023/02/28/audio_550d815fad.mp3?filename=the-best-jazz-club-in-new-orleans-164472.mp3",
+    title: "Tera Chehra",
+    url: "https://cdn.pixabay.com/download/audio/2026/06/06/audio_2616644862.mp3?filename=u_peqs3yb1iv-tera-chehra-sanam-teri-kasam-128-kbps-547561.mp3",
   },
 ];
 

@@ -11,7 +11,7 @@ const TRACKS: Track[] = [
   },
   {
     title: "Haal-E-Dil (Male Vocals)",
-    url: "https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8c8a73467.mp3?filename=acoustic-guitar-loop-f-91bpm-132687.mp3",
+    url: "https://cdn.pixabay.com/download/audio/2026/06/06/audio_6f80f851d3.mp3?filename=u_peqs3yb1iv-haal-e-dil-male-vocalskoshalworldcom-547559.mp3",
   },
   {
     title: "Soft Lofi",

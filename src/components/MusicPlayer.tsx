@@ -14,8 +14,8 @@ const TRACKS: Track[] = [
     url: "https://cdn.pixabay.com/download/audio/2026/06/06/audio_6f80f851d3.mp3?filename=u_peqs3yb1iv-haal-e-dil-male-vocalskoshalworldcom-547559.mp3",
   },
   {
-    title: "Soft Lofi",
-    url: "https://cdn.pixabay.com/download/audio/2022/08/02/audio_2dde668ca0.mp3?filename=lofi-study-112191.mp3",
+    title: "Sanam Teri Kasam",
+    url: "https://cdn.pixabay.com/download/audio/2026/06/06/audio_d20101e188.mp3?filename=u_peqs3yb1iv-sanam-teri-kasam-ankit-tiwari-128-kbps-547560.mp3",
   },
   {
     title: "Cinematic Strings",

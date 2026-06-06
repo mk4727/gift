@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Heart, Star, Sparkles, Flower2, ChevronLeft, ChevronRight, BookOpen } from "lucide-react";
 import { Layout } from "@/components/Layout";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { supabase } from "@/integrations/supabase/client";
 
 type ImageRow = { id: string; image_url: string; media_type?: string };
@@ -50,6 +51,7 @@ const MAX_PAGES = 20; // inner spreads (each spread has 4 photos)
 const FLIP_MS = 1100;
 
 const Scrapbook = () => {
+  const isMobile = useIsMobile();
   const [photos, setPhotos] = useState<Photo[]>([]);
   // 0 = cover closed, 1..MAX_PAGES = spreads, MAX_PAGES+1 = back cover
   const [index, setIndex] = useState(0);
@@ -276,18 +278,29 @@ const Scrapbook = () => {
               {/* Book */}
               <div
                 className="relative mx-auto"
-                style={{ perspective: "2600px", width: "min(96vw, 1000px)" }}
+                style={{ perspective: "2600px", width: isMobile ? "min(94vw, 480px)" : "min(96vw, 1000px)" }}
               >
-                <div className="relative aspect-[16/10]">
+                <div className={`relative ${isMobile ? "aspect-[3/4]" : "aspect-[16/10]"}`}>
                   {/* Bottom shadow / book base */}
                   <div className="absolute -inset-3 rounded-xl bg-gradient-to-b from-stone-900/40 to-stone-900/10 blur-xl -z-10" />
 
                   {/* Static spread underneath */}
-                  <div className="absolute inset-0 grid grid-cols-2 rounded-md overflow-hidden border border-rose-200/60 bg-rose-50 shadow-2xl">
-                    <div className="relative w-full h-full overflow-hidden">{leftContent()}</div>
-                    <div className="relative w-full h-full overflow-hidden">{rightContent()}</div>
-                    {/* Center spine */}
-                    <div className="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-5 bg-gradient-to-r from-rose-300/0 via-stone-900/45 to-rose-300/0" />
+                  <div className={`absolute inset-0 ${isMobile ? "grid grid-cols-1" : "grid grid-cols-2"} rounded-md overflow-hidden border border-rose-200/60 bg-rose-50 shadow-2xl`}>
+                    {!isMobile && (
+                      <div className="relative w-full h-full overflow-hidden">{leftContent()}</div>
+                    )}
+                    <div className="relative w-full h-full overflow-hidden">
+                      {isMobile
+                        ? (index === 0
+                            ? <CoverFace kind="front" />
+                            : index === totalViews - 1
+                              ? <CoverFace kind="back" />
+                              : <InnerHalf halfIdx={index} side="right" />)
+                        : rightContent()}
+                    </div>
+                    {!isMobile && (
+                      <div className="pointer-events-none absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-5 bg-gradient-to-r from-rose-300/0 via-stone-900/45 to-rose-300/0" />
+                    )}
                   </div>
 
                   {/* Flipping leaf (covers half the book) */}
@@ -301,10 +314,12 @@ const Scrapbook = () => {
                         transition={{ duration: FLIP_MS / 1000, ease: [0.45, 0.05, 0.25, 1] }}
                         className="absolute top-0 bottom-0 z-20"
                         style={{
-                          left: flip.dir === 1 ? "50%" : "0%",
-                          width: "50%",
+                          left: isMobile ? "0%" : (flip.dir === 1 ? "50%" : "0%"),
+                          width: isMobile ? "100%" : "50%",
                           transformStyle: "preserve-3d",
-                          transformOrigin: flip.dir === 1 ? "left center" : "right center",
+                          transformOrigin: isMobile
+                            ? (flip.dir === 1 ? "left center" : "right center")
+                            : (flip.dir === 1 ? "left center" : "right center"),
                           willChange: "transform",
                         }}
                       >
@@ -313,8 +328,13 @@ const Scrapbook = () => {
                           className="absolute inset-0 overflow-hidden bg-rose-50 shadow-2xl"
                           style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}
                         >
-                          {flipFrontContent()}
-                          {/* dynamic curl shadow */}
+                          {isMobile
+                            ? (flip.from === 0
+                                ? <CoverFace kind="front" />
+                                : flip.from === totalViews - 1
+                                  ? <CoverFace kind="back" />
+                                  : <InnerHalf halfIdx={flip.from} side="right" />)
+                            : flipFrontContent()}
                           <motion.div
                             initial={{ opacity: 0 }}
                             animate={{ opacity: [0, 0.6, 0] }}
@@ -337,7 +357,13 @@ const Scrapbook = () => {
                             WebkitBackfaceVisibility: "hidden",
                           }}
                         >
-                          {flipBackContent()}
+                          {isMobile
+                            ? (flip.to === 0
+                                ? <CoverFace kind="front" />
+                                : flip.to === totalViews - 1
+                                  ? <CoverFace kind="back" />
+                                  : <InnerHalf halfIdx={flip.to} side="right" />)
+                            : flipBackContent()}
                           <motion.div
                             initial={{ opacity: 0.6 }}
                             animate={{ opacity: [0.6, 0.2, 0] }}
